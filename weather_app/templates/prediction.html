@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="{% static 'css/site.css' %}" rel="stylesheet">
+</head>
+<body>
+<!-- <body onload="DefaultScreen()">
+    
+        <h1 id="Para1">5 Days Weather Forecast</h1>
+        <p id="inputContainer">City: <input type="text" id="cityInput"></p>
+        <button type="button" onclick="GetInfo()">Click Me</button>        
+        <h2 id="cityName">---London---</h2> -->
+
+
+ 
+<div class="next-5-days">
+    <h2 class="next-5-days__heading">Next 5 days</h2>
+</div>
+    <div class="next-5-days__container">
+
+      <div class="next-5-days__row">
+
+        <div class="next-5-days__date">
+      
+          <div class="next-5-days__label" id="day1" ></div>
+        </div>
+
+        <div class="next-5-days__low">
+          <p class="minValues" id="day1Min">Loading...</p>
+          <div class="next-5-days__label">Low</div>
+        </div>
+
+        <div class="next-5-days__high">
+          <p class="maxValues" id="day1Max">Loading...</p>
+          <div class="next-5-days__label">High</div>
+        </div>
+
+        <div class="next-5-days__icon">
+          <img src="dots.png" class="imgClass" id="img1" alt="" width=40 >
+        </div>
+
+        <div class="next-5-days__rain">
+          
+          <div class="next-5-days__label">humidity</div>
+        </div>
+
+        <div class="next-5-days__wind">
+          {{wind}}m/s
+          <div class="next-5-days__label">Wind</div>
+        </div>
+
+      </div>
+       <div class="next-5-days__row">
+        <div class="next-5-days__date">
+        <div class="next-5-days__label" id="day2" > </div>
+      </div>
+
+        <div class="next-5-days__low">
+          <p class="minValues" id="day2Min">Loading...</p>
+          <div class="next-5-days__label">Low</div>
+        </div>
+
+        <div class="next-5-days__high">
+          <p class="maxValues" id="day2Max">Loading...</p>
+          <div class="next-5-days__label">High</div>
+        </div>
+
+        <div class="next-5-days__icon">
+          <img src="dots.png" class="imgClass" id="img2" alt="" width=40 >
+        </div>
+
+        <div class="next-5-days__rain">
+        {{humidity}}
+          <div class="next-5-days__label">humidity</div>
+        </div>
+
+        <div class="next-5-days__wind">
+          {{wind}}m/s
+          <div class="next-5-days__label">Wind</div>
+        </div>
+
+      </div>
+      <div class="next-5-days__row">
+
+        <div class="next-5-days__date">
+        
+          <div class="next-5-days__label" id= "day3"></div>
+        </div>
+
+        <div class="next-5-days__low">
+          <p class="minValues" id="day3Min">Loading...</p>
+          <div class="next-5-days__label">Low</div>
+        </div>
+
+        <div class="next-5-days__high">
+          <p class="maxValues" id="day3Max">Loading...</p>
+          <div class="next-5-days__label">High</div>
+        </div>
+
+        <div class="next-5-days__icon">
+          <img src="dots.png" class="imgClass" id="img3" alt="Mostly sunny">
+        </div>
+
+        <div class="next-5-days__rain">
+          75%
+          <div class="next-5-days__label">Rain</div>
+        </div>
+
+        <div class="next-5-days__wind">
+          11mph
+          <div class="next-5-days__label">Wind</div>
+        </div>
+
+      </div>
+      <div class="next-5-days__row">
+
+        <div class="next-5-days__date">
+          Tue
+          <div class="next-5-days__label">2/8</div>
+        </div>
+
+        <div class="next-5-days__low">
+          12&deg;
+          <div class="next-5-days__label">Low</div>
+        </div>
+
+        <div class="next-5-days__high">
+          24&deg;
+          <div class="next-5-days__label">High</div>
+        </div>
+
+        <div class="next-5-days__icon">
+          <img src="{% static 'icons/sunny.svg' %}" alt="Sunny">
+        </div>
+
+        <div class="next-5-days__rain">
+          2%
+          <div class="next-5-days__label">Rain</div>
+        </div>
+
+        <div class="next-5-days__wind">
+          8mph
+          <div class="next-5-days__label">Wind</div>
+        </div>
+
+      </div>
+      <div class="next-5-days__row">
+
+        <div class="next-5-days__date">
+          Tue
+          <div class="next-5-days__label">30/7</div>
+        </div>
+
+        <div class="next-5-days__low">
+          10&deg;
+          <div class="next-5-days__label">Low</div>
+        </div>
+
+        <div class="next-5-days__high">
+          21&deg;
+          <div class="next-5-days__label">High</div>
+        </div>
+
+        <div class="next-5-days__icon">
+          <img src="{% static 'icons/mostly-sunny.svg' %}" alt="Mostly sunny">
+        </div>
+
+        <div class="next-5-days__rain">
+          0%
+          <div class="next-5-days__label">Rain</div>
+        </div>
+
+        <div class="next-5-days__wind">
+          12mph
+          <div class="next-5-days__label">Wind</div>
+        </div> 
+        
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <script src="{% static 'jquery.min.js' %}"></script>
+<script src="{% static 'main.js' %}"></script> -->
+</body>
+</html>

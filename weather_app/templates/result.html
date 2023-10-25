@@ -1,0 +1,350 @@
+
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather App</title>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="{% static 'css/site.css' %}" rel="stylesheet">
+  
+</head>
+<body> 
+  <!-- <div id="menubar">
+    <ul id="menu">
+      <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+      <!-- <li class="selected"><a href="{% url 'app1:index' %}">Home</a></li>
+      <li><a href="result.html">hourly</a></li>
+     
+      
+      <li><a href="result.html">weekly</a></li>  
+    </ul>
+  </div>  --> 
+  <style>
+    /* body{
+      background: linear-gradient(to bottom, rgba(5, 102, 131, 0.911) 0%, rgb(7, 90, 122) 100%);
+    } */
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #07559e;
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover:not(.active) {
+      background-color: #083dec;
+    }
+    
+    .active {
+      background-color: #0c0101;
+    }
+    .current-feels__value {
+  font-size: 1.125em;
+  font-weight: 100;
+  font-family: 'Open Sans', sans-serif;
+}
+    </style>
+    </head>
+    <body>
+    
+    <ul>
+      <li><a href="#current">Current</a></li>
+      <li><a href="#hourly">Hourly</a></li>
+      <li><a href="#weekly">Weekly</a></li>
+      <li style="float:right"><a class="active" href="{% url 'app1:index' %}">Home</a></li>
+    </ul>
+<main class="main-container">
+  <!-- <div class="main-navigation">
+   
+   
+    <form action="{% url 'app1:index' %}" class="inline">
+      <button class="float-left-submit-button" >Home</button>
+  </form>
+    <!-- .menu -->
+  <!-- </div>   --> 
+ 
+  <div class="location-and-date">
+    <h1 class="location-and-date__location">{{city}}</h1>
+    <div class="day">{{date_time}}</div>
+      <div class="date_time">{% now "l" %}</div>
+      
+  </div>
+
+
+  <div class="current-temperature">
+    <div class="current-temperature__icon-container">
+      <img src="http://openweathermap.org/img/wn/{{icon}}@2x.png" alt="" width=100 class="current-temperature__icon" >
+    </div>
+    <div class="current-temperature__content-container">
+      <div class="current-temperature__value">{{temp}}&deg;</div>
+      <div class="current-temperature__summary">{{description}}</div>
+      <div class="current-feels__value">Feels_like:{{feels_like}}&deg;</div>
+      
+    </div>
+  </div>
+
+
+  <div class="current-stats">
+    <div>
+      <div class="current-stats__value">{{temp_max}}&deg;</div>
+      <div class="current-stats__label">High</div>
+      <div class="current-stats__value">{{temp_min}}&deg;</div>
+      <div class="current-stats__label">Low</div>
+    </div>
+    <div>
+      <div class="current-stats__value">{{wind}}km/h</div>
+      <div class="current-stats__label">Wind</div>
+      <div class="current-stats__value">{{grnd_level}}</div>
+      <div class="current-stats__label">Ground_level</div>
+    </div>
+    <div>
+      <div class="current-stats__value">{{pressure}}mb</div>
+      <div class="current-stats__label">pressure</div>
+      <div class="current-stats__value">{{humidity}}%</div>
+      <div class="current-stats__label">humidity</div>
+    </div>
+  </div>
+  
+  <div class="weather-by-hour">
+    <section id="hourly">
+    <h2 class="weather-by-hour__heading">Today's weather</h2>
+    <div class="weather-by-hour__container">
+      
+      <div class="weather-by-hour__item">
+        <div class="weather-by-hour__hour">{{date_time1}}</div>
+        <img src="http://openweathermap.org/img/wn/{{icon1}}@2x.png" alt="" width=50><br>
+        {{description1}}
+        <div>{{temp_max1}}&deg / {{temp_min1}}&deg;</div>
+      </div>
+      <div class="weather-by-hour__item">  
+        <div class="weather-by-hour__hour">{{date_time2}}</div>
+        <img src="http://openweathermap.org/img/wn/{{icon2}}@2x.png" alt="" width=50 ><br>
+        {{description2}}
+        <div>{{temp_max2}}&deg / {{temp_min2}}&deg;</div>
+      </div>
+      <div class="weather-by-hour__item">
+        <div class="weather-by-hour__hour">{{date_time3}}</div>
+        <img src="http://openweathermap.org/img/wn/{{icon3}}@2x.png" alt="" width=50 ><br>
+        {{description3}}
+        <div>{{temp_max3}}&deg / {{temp_min3}}&deg;</div> 
+      </div>
+      <div class="weather-by-hour__item">
+        <div class="weather-by-hour__hour">{{date_time4}}</div>
+        <img src="http://openweathermap.org/img/wn/{{icon4}}@2x.png" alt="" width=50><br>
+        {{description4}}
+        <div>{{temp_max4}}&deg / {{temp_min4}}&deg;</div>
+      </div>
+      <div class="weather-by-hour__item">
+        
+        <div class="weather-by-hour__hour">{{date_time5}}</div>
+        <img src="http://openweathermap.org/img/wn/{{icon5}}@2x.png" alt="" width=50 ><br>
+        {{description5}}
+        <div>{{temp_max5}}&deg / {{temp_min5}}&deg;</div>
+      </div>
+    </div>
+  </section>
+  </div>
+    
+      
+
+  
+ 
+
+
+  <div class="next-5-days">
+    <section id="weekly">
+    <h2 class="next-5-days__heading">Next 4 days</h2>
+    <div id="forecast">
+
+    </div>
+    <div class="next-5-days__row">
+
+      <div class="next-5-days__date">
+        {{date_time8}}
+        <div class="next-5-days__label"></div>
+      </div>
+
+      <div class="next-5-days__low">
+        {{temp_min8}}&deg;
+        <div class="next-5-days__label">Low</div>
+      </div>
+
+      <div class="next-5-days__high">
+        {{temp_max8}}&deg;
+        <div class="next-5-days__label">High</div>
+      </div>
+
+      <div class="next-5-days__icon">
+        <img src="http://openweathermap.org/img/wn/{{icon8}}@2x.png" alt="" width=40 ><br>
+        {{description8}}
+      </div>
+
+      <div class="next-5-days__rain">
+        {{humidity8}}%
+        <div class="next-5-days__label">Humidity</div>
+      </div>
+
+      <div class="next-5-days__wind">
+        {{wind8}}m/s
+        <div class="next-5-days__label">Wind</div>
+      </div> 
+      
+    </div>
+    <div class="next-5-days__row">
+
+      <div class="next-5-days__date">
+        {{date_time16}}
+        <div class="next-5-days__label"></div>
+      </div>
+
+      <div class="next-5-days__low">
+        {{temp_min16}}&deg;
+        <div class="next-5-days__label">Low</div>
+      </div>
+
+      <div class="next-5-days__high">
+        {{temp_max16}}&deg;
+        <div class="next-5-days__label">High</div>
+      </div>
+
+      <div class="next-5-days__icon">
+        <img src="http://openweathermap.org/img/wn/{{icon16}}@2x.png" alt="" width=40 ><br>
+        {{description16}}
+      </div>
+
+      <div class="next-5-days__rain">
+        {{humidity16}}%
+        <div class="next-5-days__label">Humidity</div>
+      </div>
+
+      <div class="next-5-days__wind">
+        {{wind16}}m/s
+        <div class="next-5-days__label">Wind</div>
+      </div> 
+      
+    </div>
+    <div class="next-5-days__row">
+
+      <div class="next-5-days__date">
+        {{date_time24}}
+        <div class="next-5-days__label"></div>
+      </div>
+
+      <div class="next-5-days__low">
+        {{temp_min24}}&deg;
+        <div class="next-5-days__label">Low</div>
+      </div>
+
+      <div class="next-5-days__high">
+        {{temp_max24}}&deg;
+        <div class="next-5-days__label">High</div>
+      </div>
+
+      <div class="next-5-days__icon">
+        <img src="http://openweathermap.org/img/wn/{{icon24}}@2x.png" alt="" width=40 ><br>
+        {{description24}}
+      </div>
+
+      <div class="next-5-days__rain">
+      {{humidity24}}%
+        <div class="next-5-days__label">Humidity</div>
+      </div>
+
+      <div class="next-5-days__wind">
+        {{wind24}}m/s
+        <div class="next-5-days__label">Wind</div>
+      </div> 
+      
+    </div>
+      <div class="next-5-days__row">
+
+        <div class="next-5-days__date">
+          {{date_time32}}
+          <div class="next-5-days__label"></div>
+        </div>
+
+        <div class="next-5-days__low">
+          {{temp_min32}}&deg;
+          <div class="next-5-days__label">Low</div>
+        </div>
+
+        <div class="next-5-days__high">
+          {{temp_max32}}&deg;
+          <div class="next-5-days__label">High</div>
+        </div>
+
+        <div class="next-5-days__icon">
+          <img src="http://openweathermap.org/img/wn/{{icon32}}@2x.png" alt="" width=40 ><br>
+          {{description32}}
+        </div>
+
+        <div class="next-5-days__rain">
+          {{humidity32}}%
+          <div class="next-5-days__label">Humidity</div>
+        </div>
+
+        <div class="next-5-days__wind">
+          {{wind32}}m/s
+          <div class="next-5-days__label">Wind</div>
+        </div>
+      </section>
+
+      </div>
+      <!-- <div class="next-5-days__row">
+
+        <div class="next-5-days__date">
+          {{date_time40}}
+          <div class="next-5-days__label"></div>
+        </div>
+
+        <div class="next-5-days__low">
+          {{temp_min40}}&deg;
+          <div class="next-5-days__label">Low</div>
+        </div>
+
+        <div class="next-5-days__high">
+          {{temp_max40}}&deg;
+          <div class="next-5-days__label">High</div>
+        </div>
+
+        <div class="next-5-days__icon">
+          <img src="http://openweathermap.org/img/wn/{{icon40}}@2x.png" alt="" width=40 ><br>
+          {{description40}}
+        </div>
+
+        <div class="next-5-days__rain">
+          {{humidity40}}%
+          <div class="next-5-days__label">Humidity</div>
+        </div>
+
+        <div class="next-5-days__wind">
+          {{wind40}}m/s
+          <div class="next-5-days__label">Wind</div>
+        </div> 
+        
+      </div> -->
+
+    </div>
+  </div> 
+</body>
+</main>
+</html>

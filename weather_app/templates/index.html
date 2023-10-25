@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather app</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static 'css/site.css' %}" rel="stylesheet">
+    <style>
+      /* Style the container for the location icon */
+      /* body{
+        background: linear-gradient(to bottom, rgba(5, 102, 131, 0.911) 0%, rgb(7, 90, 122) 100%);
+      } */
+      .location-icon-container {
+          position: fixed;
+          bottom: 20px; /* Adjust this value to position the icon vertically */
+          right: 20px; /* Adjust this value to position the icon horizontally */
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+      }
+
+      /* Style the icon image */
+      .location-icon {
+          width: 100%;
+          height: 100%;
+          background-image: url("/static/images/place.png"); /* Replace with your image URL */
+          background-size: cover;
+      }
+  </style> 
+    
+</head>
+<body>
+     <div class="site-content">
+          <div class="site-header">
+            <div class="container">
+              
+               <div class="location-icon-container">
+                  <div class="location-icon"></div>
+               </div>
+              
+                <img src="{% static 'images/logo.png' %}" alt="" class="logo">
+                <div class="logo-type">
+                  <h1 class="site-title">  Weather forcasting system </h1>
+                  <large class="site-description">Real time weather forecast</large>
+                </div>
+              </a>
+                <br><br><br>
+            
+            
+            
+                
+              <center>
+          <div class="hero" data-bg-image="{% static 'images/banner.png' %}">
+            <div class="search">
+              <form action="{% url 'app1:result' %}" class="find-location"    method="POST">
+                {% csrf_token%}
+                <input type="search" name="city"   placeholder="Enter your city name..." required>
+                <button class="btnbtn-success" onclick="getLocation()"  type="submit">
+                  
+                  Search
+              
+                  <!-- <a href="/result">find</a> -->
+                </button>
+                
+                </form>
+
+               </div>
+          </div></center>
+          <!DOCTYPE html>
+
+
+    <script>
+        // Function to handle the button click event
+        function getLocation() {
+            // Check if geolocation is available in the user's browser
+            if ('geolocation' in navigator) {
+                // Get the user's current position
+                navigator.geolocation.getCurrentPosition(
+                    // Success callback function
+                    function (position) {
+                        // Access the latitude and longitude from the position object
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+
+                        // Call the reverse geocoding API to get the city name
+                        const apiKey = 'AIzaSyDE6d-l7pVUkzI2EgB9tMdqGfA4Q0SNzt8';
+                        const geocodingApiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+
+                        fetch(geocodingApiUrl)
+                            .then(response => response.json())
+                            .then(data => {
+                                // Check if the response contains a valid result
+                                if (data.status === 'OK' && data.results.length > 0) {
+                                    // Get the city name from the first result
+                                    const cityName = data.results[0].address_components.find(component => component.types.includes('locality')).long_name;
+                                    // Update the search bar with the city name
+                                    const searchBar = document.getElementById('searchBar');
+                                    searchBar.value = cityName;
+                                    // Update the result element with the city name
+                                    document.getElementById('result').textContent = `City: ${cityName}`;
+                                } else {
+                                    // Handle the case when no result is found
+                                    document.getElementById('result').textContent = 'City not found.';
+                                }
+                            })
+                            .catch(error => {
+                                // Handle errors from the API request
+                                document.getElementById('result').textContent = `Error: ${error.message}`;
+                            });
+                    },
+                    // Error callback function
+                    function (error) {
+                        // Handle errors (e.g., user denied location access)
+                        document.getElementById('result').textContent = `Error: ${error.message}`;
+                    }
+                );
+            } else {
+                // Geolocation is not supported in the user's browser
+                document.getElementById('result').textContent = 'Geolocation is not available in your browser.';
+            }
+        }
+
+        // Attach the getLocation function to the button click event
+        document.getElementById('getLocationBtn').addEventListener('click', getLocation);
+
+        // Automatically fill in the search bar with the user's current city name when the page loads
+        window.addEventListener('load', getLocation);
+    </script>
+</body>
+</html>
+
+
+
+          <!-- <script src="{% static 'main.js' %}"></script> -->
+</body>
+</html>
